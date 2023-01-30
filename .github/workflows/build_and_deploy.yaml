@@ -1,0 +1,48 @@
+name: Deploy Snowpark Apps
+
+# Controls when the action will run. 
+on:
+  push:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install Python packages
+        run: pip install -r requirements.txt
+
+      - name: Configure snowcli
+        env:
+          SNOWSQL_ACCOUNT: ${{ secrets.SNOWSQL_ACCOUNT }}
+          SNOWSQL_USER: ${{ secrets.SNOWSQL_USER }}
+          SNOWSQL_PWD: ${{ secrets.SNOWSQL_PWD }}
+          SNOWSQL_ROLE: ${{ secrets.SNOWSQL_ROLE }}
+          SNOWSQL_WAREHOUSE: ${{ secrets.SNOWSQL_WAREHOUSE }}
+          SNOWSQL_DATABASE: ${{ secrets.SNOWSQL_DATABASE }}
+        run: |
+          cd $GITHUB_WORKSPACE
+          echo "[connections.dev]" > config
+          echo "account = $SNOWSQL_ACCOUNT" >> config
+          echo "username = $SNOWSQL_USER" >> config
+          echo "password = $SNOWSQL_PWD" >> config
+          echo "rolename = $SNOWSQL_ROLE" >> config
+          echo "warehousename = $SNOWSQL_WAREHOUSE" >> config
+          echo "dbname = $SNOWSQL_DATABASE" >> config
+
+      - name: Deploy Snowpark apps
+        run: python deploy_snowpark_apps.py $GITHUB_WORKSPACE
