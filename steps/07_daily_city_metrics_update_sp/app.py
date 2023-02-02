@@ -36,8 +36,7 @@ def create_daily_city_metrics_table(session):
 
 
 def merge_daily_city_metrics(session):
-    _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XLARGE').collect()
-    time.sleep(5)
+    _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE').collect()
 
     print("{} records in stream".format(session.table('HARMONIZED.ORDERS_STREAM').count()))
     orders_stream_dates = session.table('HARMONIZED.ORDERS_STREAM').select(F.col("ORDER_TS_DATE").alias("DATE")).distinct()
