@@ -1,13 +1,12 @@
 /*-----------------------------------------------------------------------------
 Hands-On Lab: Data Engineering with Snowpark
 Script:       09_process_incrementally.sql
-Author:       Jeremiah Hansen
 Last Updated: 1/9/2023
 -----------------------------------------------------------------------------*/
 
-USE ROLE HOL_ROLE;
-USE WAREHOUSE HOL_WH;
-USE DATABASE HOL_DB;
+USE ROLE HOL_ROLE_DE;
+USE WAREHOUSE HOL_WH_DE;
+USE DATABASE HOL_DB_DE;
 
 
 -- ----------------------------------------------------------------------------
@@ -16,7 +15,7 @@ USE DATABASE HOL_DB;
 
 USE SCHEMA RAW_POS;
 
-ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE;
+ALTER WAREHOUSE HOL_WH_DE SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE;
 
 COPY INTO ORDER_HEADER
 FROM @external.frostbyte_raw_stage/pos/order_header/year=2022
@@ -31,7 +30,7 @@ MATCH_BY_COLUMN_NAME = CASE_SENSITIVE;
 -- See how many new records are in the stream (this may be a bit slow)
 --SELECT COUNT(*) FROM HARMONIZED.POS_FLATTENED_V_STREAM;
 
-ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL;
+ALTER WAREHOUSE HOL_WH_DE SET WAREHOUSE_SIZE = MEDIUM;
 
 
 -- ----------------------------------------------------------------------------

@@ -1,16 +1,15 @@
 /*-----------------------------------------------------------------------------
 Hands-On Lab: Data Engineering with Snowpark
 Script:       08_orchestrate_jobs.sql
-Author:       Jeremiah Hansen
 Last Updated: 1/9/2023
 -----------------------------------------------------------------------------*/
 
 -- SNOWFLAKE ADVANTAGE: Tasks (with Stream triggers)
 -- SNOWFLAKE ADVANTAGE: Task Observability
 
-USE ROLE HOL_ROLE;
-USE WAREHOUSE HOL_WH;
-USE SCHEMA HOL_DB.HARMONIZED;
+USE ROLE HOL_ROLE_DE;
+USE WAREHOUSE HOL_WH_DE;
+USE SCHEMA HOL_DB_DE.HARMONIZED;
 
 
 -- ----------------------------------------------------------------------------
@@ -18,14 +17,14 @@ USE SCHEMA HOL_DB.HARMONIZED;
 -- ----------------------------------------------------------------------------
 
 CREATE OR REPLACE TASK ORDERS_UPDATE_TASK
-WAREHOUSE = HOL_WH
+WAREHOUSE = HOL_WH_DE
 WHEN
   SYSTEM$STREAM_HAS_DATA('POS_FLATTENED_V_STREAM')
 AS
 CALL HARMONIZED.ORDERS_UPDATE_SP();
 
 CREATE OR REPLACE TASK DAILY_CITY_METRICS_UPDATE_TASK
-WAREHOUSE = HOL_WH
+WAREHOUSE = HOL_WH_DE
 AFTER ORDERS_UPDATE_TASK
 WHEN
   SYSTEM$STREAM_HAS_DATA('ORDERS_STREAM')

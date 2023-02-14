@@ -1,16 +1,15 @@
 /*-----------------------------------------------------------------------------
 Hands-On Lab: Data Engineering with Snowpark
 Script:       11_teardown.sql
-Author:       Jeremiah Hansen
 Last Updated: 1/9/2023
 -----------------------------------------------------------------------------*/
 
 
 USE ROLE ACCOUNTADMIN;
 
-DROP DATABASE HOL_DB;
-DROP WAREHOUSE HOL_WH;
-DROP ROLE HOL_ROLE;
+DROP DATABASE IF EXISTS HOL_DB_DE;
+DROP WAREHOUSE IF EXISTS HOL_WH_DE;
+DROP ROLE IF EXISTS HOL_ROLE_DE;
 
 -- Drop the weather share
-DROP DATABASE FROSTBYTE_WEATHERSOURCE;
+DROP DATABASE IF EXISTS FROSTBYTE_WEATHERSOURCE;

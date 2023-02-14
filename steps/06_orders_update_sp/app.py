@@ -1,7 +1,6 @@
 #------------------------------------------------------------------------------
 # Hands-On Lab: Data Engineering with Snowpark
 # Script:       06_orders_process_sp/app.py
-# Author:       Jeremiah Hansen, Caleb Baechtold
 # Last Updated: 1/9/2023
 #------------------------------------------------------------------------------
 
@@ -26,12 +25,11 @@ def create_orders_stream(session):
                     SHOW_INITIAL_ROWS = TRUE;").collect()
 
 def merge_order_updates(session):
-    _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE').collect()
+    _ = session.sql('ALTER WAREHOUSE HOL_WH_DE SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE').collect()
 
     source = session.table('HARMONIZED.POS_FLATTENED_V_STREAM')
     target = session.table('HARMONIZED.ORDERS')
 
-    # TODO: Is the if clause supposed to be based on "META_UPDATED_AT"?
     cols_to_update = {c: source[c] for c in source.schema.names if "METADATA" not in c}
     metadata_col_to_update = {"META_UPDATED_AT": F.current_timestamp()}
     updates = {**cols_to_update, **metadata_col_to_update}
@@ -40,7 +38,7 @@ def merge_order_updates(session):
     target.merge(source, target['ORDER_DETAIL_ID'] == source['ORDER_DETAIL_ID'], \
                         [F.when_matched().update(updates), F.when_not_matched().insert(updates)])
 
-    _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL').collect()
+    _ = session.sql('ALTER WAREHOUSE HOL_WH_DE SET WAREHOUSE_SIZE = MEDIUM').collect()
 
 def main(session: Session) -> str:
     # Create the ORDERS table and ORDERS_STREAM stream if they don't exist
