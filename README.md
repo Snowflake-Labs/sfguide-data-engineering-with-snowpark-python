@@ -2,7 +2,7 @@
 
 This README contains the overview and lab instructions for *Data Engineering Pipelines with Snowpark Python* code contained in this repository.
 
-### ➡️ for prerequisites, see this guide for detailed steps [Data Engineering Pipelines with Snowpark Python Prerequisites](https://docs.google.com/document/d/1ezyB9_NEPOTtSBdLUQrLU1dyP4ax5HM_2Devut8kgYw/edit#).
+### ➡️ for prerequisites, see this guide for detailed steps [Data Engineering Pipelines with Snowpark Python Prerequisites (https://docs.google.com/document/d/1ezyB9_NEPOTtSBdLUQrLU1dyP4ax5HM_2Devut8kgYw/edit#).
 
 Here is an overview of what we'll build in this lab:
 
@@ -285,18 +285,7 @@ Notice that this time we're also running pip install to make sure that our depen
 
 ### Configuring Your Forked GitHub Project ###
 
-In order for your GitHub Actions workflow to be able to connect to your Snowflake account you will need to store your Snowflake credentials in GitHub. Action Secrets in GitHub are used to securely store values/variables which will be used in your CI/CD pipelines. In this step, we will create secrets for each of the parameters used by SnowCLI.
-
-From the repository, click on the `Settings` tab near the top of the page. From the Settings page, click on the `Secrets and variables` then `Actions` tab in the left-hand navigation. The `Actions` secrets should be selected. For each secret listed below click on `New repository secret` near the top right and enter the name given below along with the appropriate value (adjusting as appropriate).
-
-| Secret name      | Secret value  |
-| ---------------  |:-------------:|
-| SNOWSQL_ACCOUNT  | myaccount     |
-| SNOWSQL_USER     | myusername    |
-| SNOWSQL_PWD      | mypassword    |
-| SNOWSQL_ROLE     | HOL_ROLE      |
-| SNOWSQL_WAREHOUSE| HOL_WH        |
-| SNOWSQL_DATABASE | HOL_DB        |
+In order for your GitHub Actions workflow to be able to connect to your Snowflake account you will need to store your Snowflake credentials in GitHub. This should already have been done as part of the prerequisites. If you have not yet set up the secrets, follow the [steps in the prerequistes guide](https://docs.google.com/document/d/1ezyB9_NEPOTtSBdLUQrLU1dyP4ax5HM_2Devut8kgYw/edit#bookmark=id.r4p2jy9mzt29) to complete this step.
 
 
 ### Push Changes to Forked Repository ###
@@ -319,4 +308,4 @@ Now that you’re finished with the lab, you can simply run the `steps/11_teardo
 
 In this Lab we have built a robust data engineering pipeline using Snowpark Python stored procedures. This pipeline processes data incrementally, is orchestrated with Snowflake tasks, and is deployed via a CI/CD pipeline. You also learned how to use Snowflake's new developer CLI tool and Visual Studio Code/Codespaces extension! This lab has only just touched on what's possible with Snowpark. Hopefully, you now have the building blocks and examples that you need to get started building your own data engineering pipeline with Snowpark Python. So, what will you build next?
 
-If you want to go through this lab again in a self-paced format, visit the [Data Engineering Pipelines with Snowpark Python] (https://quickstarts.snowflake.com/guide/data_engineering_pipelines_with_snowpark_python/#0) quickstart from Snowflake.
+If you want to go through this lab again in a self-paced format, visit the [Data Engineering Pipelines with Snowpark Python](https://quickstarts.snowflake.com/guide/data_engineering_pipelines_with_snowpark_python/#0) quickstart from Snowflake.
