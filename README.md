@@ -1,5 +1,7 @@
 # Data Engineering Pipelines with Snowpark Python Lab Guide
 
+This README contains the overview and lab instructions for *Data Engineering Pipelines with Snowpark Python* code contained in this repository.
+
 ### ➡️ for prerequisites, see this guide for detailed steps [Data Engineering Pipelines with Snowpark Python Prerequisites](https://docs.google.com/document/d/1ezyB9_NEPOTtSBdLUQrLU1dyP4ax5HM_2Devut8kgYw/edit#).
 
 Here is an overview of what we'll build in this lab:
