@@ -9,3 +9,6 @@ dependencies:
   - pip:
     # Snowflake
     - snowflake-cli-labs
+    - streamlit
+    - matplotlib
+    - seaborn

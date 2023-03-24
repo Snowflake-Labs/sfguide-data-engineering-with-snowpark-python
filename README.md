@@ -300,7 +300,20 @@ At this point those changes are only committed locally and have not yet been pus
 
 This repository is already set up with a very simple GitHub Actions CI/CD pipeline. You can review the code for the workflow by opening the `.github/workflows/build_and_deploy.yaml` file in Codespaces.
 
-## Step 11 - Teardown
+## Step 11 - Deploy Streamlit Application
+
+Now that we've created a data pipline to combine POS data with Weather data, let's create a simple Streamlit application to visualize the data and see if we can identify any correlation that warrants further discovery by the Analytics, or Data Science team.
+
+To deploy the application, we will use the streamlit run command:
+
+```
+cd ..
+streamlit run data_engineering_streamlit_app.py --server.enableCORS false --server.enableXsrfProtection false
+```
+
+Note: All of the packages for this application have already been installed in the Conda environment via the conda_env.yml. Additionally, the `--server` arguments in the streamlit run command are specific to launching the streamlit app and using github's compute. If running streamlit locally, these are not necessary.
+
+## Step 12 - Teardown
 
 Now that you’re finished with the lab, you can simply run the `steps/11_teardown.sql` script to tear down the Snowflake environment. Open the `steps/11_teardown.sql` script in Codespaces and run the whole thing using the "Execute All Statements" button in the upper right corner of the editor window.
 
