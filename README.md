@@ -308,14 +308,14 @@ To deploy the application, we will use the streamlit run command:
 
 ```
 cd ..
-streamlit run data_engineering_streamlit_app.py --server.enableCORS false --server.enableXsrfProtection false
+streamlit run 11_create_streamlit_app.py --server.enableCORS false --server.enableXsrfProtection false
 ```
 
 Note: All of the packages for this application have already been installed in the Conda environment via the conda_env.yml. Additionally, the `--server` arguments in the streamlit run command are specific to launching the streamlit app and using github's compute. If running streamlit locally, these are not necessary.
 
 ## Step 12 - Teardown
 
-Now that you’re finished with the lab, you can simply run the `steps/11_teardown.sql` script to tear down the Snowflake environment. Open the `steps/11_teardown.sql` script in Codespaces and run the whole thing using the "Execute All Statements" button in the upper right corner of the editor window.
+Now that you’re finished with the lab, you can simply run the `steps/12_teardown.sql` script to tear down the Snowflake environment. Open the `steps/12_teardown.sql` script in Codespaces and run the whole thing using the "Execute All Statements" button in the upper right corner of the editor window.
 
 ## Lab Conclusion
 
