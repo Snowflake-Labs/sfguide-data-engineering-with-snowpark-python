@@ -13,18 +13,22 @@ import snowflake.snowpark.functions as F
 
 
 def table_exists(session, schema='', name=''):
+    session.use_database('HOL_DB_DE')
     exists = session.sql("SELECT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{}' AND TABLE_NAME = '{}') AS TABLE_EXISTS".format(schema, name)).collect()[0]['TABLE_EXISTS']
     return exists
 
 def create_orders_table(session):
+    session.use_database('HOL_DB_DE')
     _ = session.sql("CREATE TABLE IF NOT EXISTS HARMONIZED.ORDERS LIKE HARMONIZED.POS_FLATTENED_V").collect()
     _ = session.sql("ALTER TABLE HARMONIZED.ORDERS ADD COLUMN META_UPDATED_AT TIMESTAMP").collect()
 
 def create_orders_stream(session):
+    session.use_database('HOL_DB_DE')
     _ = session.sql("CREATE STREAM IF NOT EXISTS HARMONIZED.ORDERS_STREAM ON TABLE HARMONIZED.ORDERS \
                     SHOW_INITIAL_ROWS = TRUE;").collect()
 
 def merge_order_updates(session):
+    session.use_database('HOL_DB_DE')
     _ = session.sql('ALTER WAREHOUSE HOL_WH_DE SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE').collect()
 
     source = session.table('HARMONIZED.POS_FLATTENED_V_STREAM')
@@ -41,6 +45,7 @@ def merge_order_updates(session):
     _ = session.sql('ALTER WAREHOUSE HOL_WH_DE SET WAREHOUSE_SIZE = MEDIUM').collect()
 
 def main(session: Session) -> str:
+    session.use_database('HOL_DB_DE')
     # Create the ORDERS table and ORDERS_STREAM stream if they don't exist
     if not table_exists(session, schema='HARMONIZED', name='ORDERS'):
         create_orders_table(session)

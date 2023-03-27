@@ -11,10 +11,12 @@ import snowflake.snowpark.functions as F
 
 
 def table_exists(session, schema='', name=''):
+    session.use_database('HOL_DB_DE')
     exists = session.sql("SELECT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{}' AND TABLE_NAME = '{}') AS TABLE_EXISTS".format(schema, name)).collect()[0]['TABLE_EXISTS']
     return exists
 
 def create_daily_city_metrics_table(session):
+    session.use_database('HOL_DB_DE')
     SHARED_COLUMNS= [T.StructField("DATE", T.DateType()),
                                         T.StructField("CITY_NAME", T.StringType()),
                                         T.StructField("COUNTRY_DESC", T.StringType()),
@@ -35,6 +37,7 @@ def create_daily_city_metrics_table(session):
 
 
 def merge_daily_city_metrics(session):
+    session.use_database('HOL_DB_DE')
     _ = session.sql('ALTER WAREHOUSE HOL_WH_DE SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE').collect()
 
     print("{} records in stream".format(session.table('HARMONIZED.ORDERS_STREAM').count()))
@@ -91,6 +94,7 @@ def merge_daily_city_metrics(session):
     _ = session.sql('ALTER WAREHOUSE HOL_WH_DE SET WAREHOUSE_SIZE = MEDIUM').collect()
 
 def main(session: Session) -> str:
+    session.use_database('HOL_DB_DE')
     # Create the DAILY_CITY_METRICS table if it doesn't exist
     if not table_exists(session, schema='ANALYTICS', name='DAILY_CITY_METRICS'):
         create_daily_city_metrics_table(session)
