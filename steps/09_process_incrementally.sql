@@ -47,7 +47,7 @@ EXECUTE TASK ORDERS_UPDATE_TASK;
 -- Step #3: Monitor tasks in Snowsight
 -- ----------------------------------------------------------------------------
 
-/*---
+
 -- TODO: Add Snowsight details here
 -- https://docs.snowflake.com/en/user-guide/ui-snowsight-tasks.html
 
