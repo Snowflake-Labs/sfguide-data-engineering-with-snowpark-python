@@ -7,7 +7,9 @@
 
 # SNOWFLAKE ADVANTAGE: Snowpark Python programmability
 # SNOWFLAKE ADVANTAGE: Python UDFs (with third-party packages)
-# SNOWFLAKE ADVANTAGE: SnowCLI (PuPr)
+
+
+# SNOWFLAKE ADVANTAGE: SnowCLI (PuPr) Maxime simons
 
 import sys
 
