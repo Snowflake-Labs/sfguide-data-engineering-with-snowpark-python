@@ -9,7 +9,7 @@
 # SNOWFLAKE ADVANTAGE: Python UDFs (with third-party packages)
 
 
-# SNOWFLAKE ADVANTAGE: SnowCLI (PuPr) Maxime simons
+# SNOWFLAKE ADVANTAGE: SnowCLI (PuPr) Maxime simons le meilleur
 
 import sys
 
