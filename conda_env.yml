@@ -3,7 +3,7 @@ channels:
   - https://repo.anaconda.com/pkgs/snowflake
   - nodefaults
 dependencies:
-  - python=3.8
+  - python=3.8.15
   - snowflake-snowpark-python
   - pip
   - pip:
