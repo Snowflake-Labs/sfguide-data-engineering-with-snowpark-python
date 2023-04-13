@@ -2,7 +2,7 @@
 
 This README contains the overview and lab instructions for *Data Engineering Pipelines with Snowpark Python* code contained in this repository.
 
-### ➡️ for prerequisites, see this guide for detailed steps [Data Engineering Pipelines with Snowpark Python Prerequisites](https://offers.phdata.io/hubfs/Snowpark%20Hands-On%20Lab%20Flyer_D4.pdf).
+### ➡️ for prerequisites, see this guide for detailed steps [Data Engineering Pipelines with Snowpark Python Prerequisites](https://drive.google.com/file/d/1ZRbyZs-ttOg8DAyPqCPvNpAcTJTEJq_g/view).
 
 Here is an overview of what we'll build in this lab:
 
