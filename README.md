@@ -13,8 +13,11 @@ Here is an overview of what we'll build in this lab:
 ### Create Anaconda Environment
 This lab will take place inside an Anaconda virtual environment running in the Codespace. You will create and activate an Anaconda environment for this lab using the supplied conda_env.yml file. Run these commands from a terminal in the root of your local forked repository.
 ```
-conda init bash
 conda env create -f conda_env.yml
+conda init bash
+```
+You will need to close and reopen the terminal, then execute:
+```
 conda activate pysnowpark
 ```
 
