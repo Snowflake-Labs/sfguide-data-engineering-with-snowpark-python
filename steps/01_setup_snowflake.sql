@@ -8,16 +8,17 @@ Last Updated: 1/1/2023
 -- Step #1: Accept Anaconda Terms & Conditions
 -- ----------------------------------------------------------------------------
 
--- See Getting Started section in Third-Party Packages (https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-packages.html#getting-started)
+-- See the Getting Started section in Third-Party Packages (https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-packages.html#getting-started)
 
 -- ----------------------------------------------------------------------------
--- Step #2: Create the account level objects
+-- Step #2: Create the account-level objects
 -- ----------------------------------------------------------------------------
 USE ROLE ACCOUNTADMIN;
 
 -- Roles
 SET MY_USER = CURRENT_USER();
 CREATE OR REPLACE ROLE HOL_ROLE_DE;
+DROP DATABASE IF EXISTS FROSTBYTE_WEATHERSOURCE;
 GRANT ROLE HOL_ROLE_DE TO ROLE SYSADMIN;
 GRANT ROLE HOL_ROLE_DE TO USER SVCSNOWPARK;
 

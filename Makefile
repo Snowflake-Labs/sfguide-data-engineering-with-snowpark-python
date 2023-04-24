@@ -24,17 +24,9 @@ fahrenheit_to_celsius: ## 		05.- Running fahrenheit_to_celsius locally
 fahrenheit_to_celsius_deploy: ## 		05.- Deploy fahrenheit_to_celsius
 	@ cd ./steps/05_fahrenheit_to_celsius_udf && snow function create
 
-.PHONY: orders_udate_sp
-orders_udate_sp: ## 		06.- Running orders_udate_sp locally
-	@ cd ./steps/06_orders_update_sp && python app.py
-
 .PHONY: orders_udate_sp_deploy
-orders_udate_sp_deploy: ## 		06.- Deploey orders_udate_sp
+orders_udate_sp_deploy: ## 		06.- Deploy orders_udate_sp
 	@ cd ./steps/06_orders_update_sp && snow procedure create
-
-.PHONY: daily_city_metrics_update_sp
-daily_city_metrics_update_sp: ## 		07.- Running daily_city_metrics_update_sp
-	@ cd ./steps/07_daily_city_metrics_update_sp && python app.py
 
 .PHONY: daily_city_metrics_update_sp_deploy
 daily_city_metrics_update_sp_deploy: ## 	07.- Running daily_city_metrics_update_sp
