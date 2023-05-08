@@ -17,7 +17,6 @@ Last Updated: 1/1/2023
 -- Step #2: Create the account level objects
 -- ----------------------------------------------------------------------------
 USE ROLE ACCOUNTADMIN;
-
 -- Roles
 SET MY_USER = CURRENT_USER();
 CREATE OR REPLACE ROLE HOL_ROLE;

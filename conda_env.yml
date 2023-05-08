@@ -9,3 +9,4 @@ dependencies:
   - pip:
     # Snowflake
     - snowflake-cli-labs
+cd 
