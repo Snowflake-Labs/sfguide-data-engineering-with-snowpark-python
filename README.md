@@ -316,7 +316,13 @@ streamlit run 11_create_streamlit_app.py --server.enableCORS false --server.enab
 
 Note: All of the packages for this application have already been installed in the Conda environment via the conda_env.yml. Additionally, the `--server` arguments in the streamlit run command are specific to launching the streamlit app and using github's compute. If running streamlit locally, these are not necessary.
 
-## Step 12 - Run Snowpark Data Science Notebook
+To stop the Streamlit App run:
+```
+ctrl + c
+```
+
+## Optional: Step 12 - Run Snowpark Data Science Notebook
+#### Skip to [Step 13](#step-13---teardown) to tear down the lab, if not exploring the notebook
 
 ### Install Jupyter
 
