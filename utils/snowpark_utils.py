@@ -70,7 +70,7 @@ def get_snowsql_config(
         config = configparser.RawConfigParser(inline_comment_prefixes="#")
         connection_path = 'connections.' + connection_name
 
-        config.read(config_file_path, encoding='utf-8')
+        config.read(config_file_path)
         session_config = config[connection_path]
         # Convert snowsql connection variable names to snowcli ones
         session_config_dict = {
