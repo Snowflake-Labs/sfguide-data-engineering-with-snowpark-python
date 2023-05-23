@@ -1,3 +1,4 @@
+import configparser
 import os
 import sys
 from snowflake.snowpark import Session
@@ -20,5 +21,7 @@ if __name__ == "__main__":
         print(oe.msg)
     except DatabaseError as de:
         print(de.msg)
+
+
 
 
