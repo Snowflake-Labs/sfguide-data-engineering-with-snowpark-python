@@ -3,6 +3,10 @@
 # Script:       02_load_raw.py
 # Author:       Jeremiah Hansen, Caleb Baechtold
 # Last Updated: 1/9/2023
+# Note from Sridhar: Copy Utils/Snowpark_util.py from the repo to local 
+#                       program files local app python folder under Utils
+#                   In the .snowsql/config copy the connection parameters
+#                   like account, user, pwd etc under [connections.dev]
 #------------------------------------------------------------------------------
 
 import time
@@ -71,9 +75,10 @@ if __name__ == "__main__":
     current_dir = os.getcwd()
     parent_dir = os.path.dirname(current_dir)
     sys.path.append(parent_dir)
-
     from utils import snowpark_utils
-    session = snowpark_utils.get_snowpark_session()
+
+    session =  snowpark_utils.get_snowpark_session()
+    session.use_database('HOL_DB')
 
     load_all_raw_tables(session)
 #    validate_raw_tables(session)
