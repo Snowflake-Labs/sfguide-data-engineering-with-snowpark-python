@@ -67,7 +67,7 @@ def get_snowsql_config(
         'schemaname': 'schema'
     }
     try:
-        config = configparser.ConfigParser(inline_comment_prefixes="#")
+        config = configparser.RawConfigParser(inline_comment_prefixes="#")
         connection_path = 'connections.' + connection_name
 
         config.read(config_file_path)
