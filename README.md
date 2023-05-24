@@ -338,7 +338,7 @@ In the top right, click the "Select Kernel," then click "Python Environments."
 
 <img src="images/12_select_kernel.png" width=800px>
 
-The dialog box should now say "Select a Python Environment."  Click the small reload icon in the top right of the dialog box, then select the "pysnowpark" kernel.
+The dialog box should now say "Select a Python Environment."  Click the small reload icon in the top right of the dialog box, then select the **"pysnowpark (python 3.8.15)"** kernel.
 
 <img src="images/12_select_conda_env.png" width=800px>
 
