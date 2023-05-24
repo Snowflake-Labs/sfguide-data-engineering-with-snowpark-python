@@ -316,7 +316,37 @@ streamlit run 11_create_streamlit_app.py --server.enableCORS false --server.enab
 
 Note: All of the packages for this application have already been installed in the Conda environment via the conda_env.yml. Additionally, the `--server` arguments in the streamlit run command are specific to launching the streamlit app and using github's compute. If running streamlit locally, these are not necessary.
 
-## Step 12 - Teardown
+To stop the Streamlit App run:
+```
+ctrl + c
+```
+
+## Optional: Step 12 - Run Snowpark Data Science Notebook
+#### Skip to [Step 13](#step-13---teardown) to tear down the lab, if not exploring the notebook
+
+### Install Jupyter
+
+Open the Extensions tab in the left sidebar and search for "jupyter" to find Jupyter extension developed by Microsoft, then install it. 
+
+<img src="images/12_install_jupyter.png" width=400px>
+
+### Open Notebook and Select Kernel
+
+Open the `steps/12_data_science_snowpark_101.ipynb` notebook in Codespaces from the file Explorer in the left navigation bar.  
+
+In the top right, click the "Select Kernel," then click "Python Environments."
+
+<img src="images/12_select_kernel.png" width=800px>
+
+The dialog box should now say "Select a Python Environment."  Click the small reload icon in the top right of the dialog box, then select the **"pysnowpark (python 3.8.15)"** kernel.
+
+<img src="images/12_select_conda_env.png" width=800px>
+
+### Run the notebook
+
+The notebook is configured to use the default roles and databases in this database to analyze Tasty Bytes data and build a machine learning model to predict ideal locations for Tasty Byte sales.  Run through the notebook one cell at a time to see how Data Scientists can use Snowpark!
+
+## Step 13 - Teardown
 
 Now that you’re finished with the lab, you can simply run the `steps/12_teardown.sql` script to tear down the Snowflake environment. Open the `steps/12_teardown.sql` script in Codespaces and run the whole thing using the "Execute All Statements" button in the upper right corner of the editor window.
 
