@@ -126,6 +126,6 @@ Lastly, lets test that the connection is successful. To do this we'll run `test_
 python test_connection.py
 ```
 
-If the connection test returns successful, you have completed all the prerequisites for the lab. If it returns an error message, reopen the credentials file that you created [in a previous step](#create-snowflake-credentials-file) and check the account is correctly formatted and the username and password are correct.
+If the connection test returns successful, you have completed all the prerequisites for the lab. If it returns an error message, reopen the credentials file that you created at the [Create Snowflake Credentials File](#create-snowflake-credentials-file) step and check the account is correctly formatted and the username and password are correct.
 
 If you have successfully completed all the steps, congratulations you are ready for the Hands on Lab! If you completed these prerequisites prior to attending the Hands on Lab, you can stop the Codespace in Github where you launched it from, or it will automatically stop after 30 mintues
