@@ -8,20 +8,8 @@ Here is an overview of what we'll build in this lab:
 
 <img src="images/demo_overview.png" width=800px>
 
-## Step 1 - Setup Anaconda Virtual Environment and Snowflake
+## Step 1 - Setup Snowflake
 
-### Create Anaconda Environment
-This lab will take place inside an Anaconda virtual environment running in the Codespace. You will create and activate an Anaconda environment for this lab using the supplied conda_env.yml file. Run these commands from a terminal in the root of your local forked repository.
-```
-conda env create -f conda_env.yml
-conda init bash
-```
-You will need to close and reopen the terminal, then execute:
-```
-conda activate pysnowpark
-```
-
-### Snowflake Setup
 This step will create the necessary role, warehouse, database, and schema for the hands-on lab. We will create 4 schemas for our data maturity model; external, RAW_POS, RAW_CUSTOMER, HARMONIZED, and ANALYTICS.
 
 <img src="images/01_setup_snowflake.png" width=800px>
