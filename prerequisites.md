@@ -94,7 +94,6 @@ In the dialog that opens, type in the path to your config file:
 Add your account details to the config file for snowsql, which are the exact same values used for the Github secrets, be sure to save the file.
 
 Note: we aren’t actually installing or using snowsql, just creating the credentials in the location that the snowpark_utils python file expects them to be, since we are just deploying code to Snowflake and not staging local data.
-If you have successfully completed all the steps, congratulations you are ready for the Hands on Lab! If you completed these prerequisites prior to attending the Hands on Lab, you can stop the Codespace in Github where you launched it from, or it will automatically stop after 30 mintues
 
 #### Create Snowsql Credentials File
 ```
@@ -106,3 +105,27 @@ rolename = HOL_ROLE
 warehousename = HOL_WH
 dbname = HOL_DB
 ```
+### Create Anaconda Environment and Test Connection
+This lab will take place inside an Anaconda virtual environment running in the Codespace. You will create and activate an Anaconda environment for this lab using the supplied conda_env.yml file. Run these commands from a terminal in the root of your local forked repository.
+```
+conda env create -f conda_env.yml
+conda init bash
+```
+You will need to close and reopen the terminal, then execute:
+```
+conda activate pysnowpark
+```
+Once activated you should see `(pysnowpark)` in front of the host name
+ 
+ <img src="images/prereq/activate_pysnowpark.png" width=800px>
+
+
+Lastly, lets test that the connection is successful. To do this we'll run `test_connection.py`
+
+```
+python test_connection.py
+```
+
+If the connection test returns successful, you have completed all the prerequisites for the lab. If it returns an error message, reopen the credentials file that you created [in a previous step](#create-snowflake-credentials-file) and check the account is correctly formatted and the username and password are correct.
+
+If you have successfully completed all the steps, congratulations you are ready for the Hands on Lab! If you completed these prerequisites prior to attending the Hands on Lab, you can stop the Codespace in Github where you launched it from, or it will automatically stop after 30 mintues
