@@ -8,4 +8,4 @@ dependencies:
   - pip
   - pip:
     # Snowflake
-    - snowflake-cli-labs
+    - snowflake-cli-labs==0.2.9
