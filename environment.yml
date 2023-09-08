@@ -1,9 +1,9 @@
-name: pysnowpark
+name: snowflake-demo
 channels:
   - https://repo.anaconda.com/pkgs/snowflake
   - nodefaults
 dependencies:
-  - python=3.8
+  - python=3.10
   - snowflake-snowpark-python
   - pip
   - pip:
