@@ -1,9 +1,9 @@
-# SnowSQL config
+# Snowflake CLI config
 
 [connections.dev]
-accountname = myaccount
-username = myusername
-password = mypassword
-rolename = HOL_ROLE
-warehousename = HOL_WH
-dbname = HOL_DB
+account = "myaccount"
+user = "myusername"
+password = "mypassword"
+role = "HOL_ROLE"
+warehouse = "HOL_WH"
+database = "HOL_DB"

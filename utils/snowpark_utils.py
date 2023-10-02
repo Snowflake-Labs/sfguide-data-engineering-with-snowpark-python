@@ -14,6 +14,7 @@ class SnowflakeConnection(object):
     def connection(self, val):
         type(self)._connection = val
 
+
 # Function to return a configured Snowpark session
 def get_snowpark_session() -> Session:
     # if running in snowflake
@@ -52,20 +53,10 @@ def get_snowpark_session() -> Session:
 # need to update snowcli to make that happen
 def get_snowsql_config(
     connection_name: str = 'dev',
-    config_file_path: str = os.path.expanduser('~/.snowsql/config'),
+    config_file_path: str = os.path.expanduser('~/.snowflake/config.toml'),
 ) -> dict:
     import configparser
 
-    snowsql_to_snowpark_config_mapping = {
-        'account': 'account',
-        'accountname': 'account',
-        'username': 'user',
-        'password': 'password',
-        'rolename': 'role',
-        'warehousename': 'warehouse',
-        'dbname': 'database',
-        'schemaname': 'schema'
-    }
     try:
         config = configparser.ConfigParser(inline_comment_prefixes="#")
         connection_path = 'connections.' + connection_name
@@ -73,10 +64,7 @@ def get_snowsql_config(
         config.read(config_file_path)
         session_config = config[connection_path]
         # Convert snowsql connection variable names to snowcli ones
-        session_config_dict = {
-            snowsql_to_snowpark_config_mapping[k]: v.strip('"')
-            for k, v in session_config.items()
-        }
+        session_config_dict = {k: v.strip('"') for k, v in session_config.items()}
         return session_config_dict
     except Exception:
         raise Exception(
