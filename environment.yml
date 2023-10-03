@@ -6,6 +6,7 @@ dependencies:
   - python=3.10
   - snowflake-snowpark-python
   - pip
+  - openssl=1.1.1
   - pip:
     # Snowflake
     - snowflake-cli-labs==0.2.9
