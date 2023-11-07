@@ -18,10 +18,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Python 3.8
+      - name: Setup Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: '3.10'
 
       - name: Install Python packages
         run: pip install -r requirements.txt
@@ -37,7 +37,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           echo "[connections.dev]" > config
-          echo "account = $SNOWSQL_ACCOUNT" >> config
+          echo "accountname = $SNOWSQL_ACCOUNT" >> config
           echo "username = $SNOWSQL_USER" >> config
           echo "password = $SNOWSQL_PWD" >> config
           echo "rolename = $SNOWSQL_ROLE" >> config

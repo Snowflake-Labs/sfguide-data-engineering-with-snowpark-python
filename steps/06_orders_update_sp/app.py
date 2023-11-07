@@ -18,12 +18,11 @@ def table_exists(session, schema='', name=''):
     return exists
 
 def create_orders_table(session):
-    _ = session.sql("CREATE TABLE IF NOT EXISTS HARMONIZED.ORDERS LIKE HARMONIZED.POS_FLATTENED_V").collect()
+    _ = session.sql("CREATE TABLE HARMONIZED.ORDERS LIKE HARMONIZED.POS_FLATTENED_V").collect()
     _ = session.sql("ALTER TABLE HARMONIZED.ORDERS ADD COLUMN META_UPDATED_AT TIMESTAMP").collect()
 
 def create_orders_stream(session):
-    _ = session.sql("CREATE STREAM IF NOT EXISTS HARMONIZED.ORDERS_STREAM ON TABLE HARMONIZED.ORDERS \
-                    SHOW_INITIAL_ROWS = TRUE;").collect()
+    _ = session.sql("CREATE STREAM HARMONIZED.ORDERS_STREAM ON TABLE HARMONIZED.ORDERS").collect()
 
 def merge_order_updates(session):
     _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE').collect()
