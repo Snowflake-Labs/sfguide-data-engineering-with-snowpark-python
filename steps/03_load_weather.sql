@@ -58,3 +58,15 @@ GRANT IMPORTED PRIVILEGES ON DATABASE FROSTBYTE_WEATHERSOURCE TO ROLE HOL_ROLE;
 
 -- Let's look at the data - same 3-part naming convention as any other table
 SELECT * FROM FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.POSTAL_CODES LIMIT 100;
+
+
+SELECT ANALYTICS.FAHRENHEIT_TO_CELSIUS_UDF(35);
+
+
+CREATE OR REPLACE  FUNCTION fahrenheit_to_celsius_udf(temp_f float)
+         RETURNS float
+         LANGUAGE PYTHON
+         RUNTIME_VERSION=3.8
+         IMPORTS=('@HOL_DB.ANALYTICS.deployments/fahrenheit_to_celsius_udftemp_f_float/app.zip')
+         HANDLER='app.main'
+         PACKAGES=();
