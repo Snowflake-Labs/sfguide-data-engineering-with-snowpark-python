@@ -31,7 +31,7 @@ MATCH_BY_COLUMN_NAME = CASE_SENSITIVE;
 -- See how many new records are in the stream (this may be a bit slow)
 --SELECT COUNT(*) FROM HARMONIZED.POS_FLATTENED_V_STREAM;
 
-ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL;
+ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = MEDIUM;
 
 
 -- ----------------------------------------------------------------------------
