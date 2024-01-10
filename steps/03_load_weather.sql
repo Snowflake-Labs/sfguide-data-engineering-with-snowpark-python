@@ -1,15 +1,9 @@
-/*-----------------------------------------------------------------------------
-Hands-On Lab: Data Engineering with Snowpark
-Script:       03_load_weather.sql
-Author:       Jeremiah Hansen
-Last Updated: 1/9/2023
------------------------------------------------------------------------------*/
-
+/
 -- SNOWFLAKE ADVANTAGE: Data sharing/marketplace (instead of ETL)
 -- SNOWFLAKE ADVANTAGE: Visual Studio Code Snowflake native extension (PrPr, Git integration)
 
 
-USE ROLE HOL_ROLE;
+USE ROLE ACCOUNTADMIN ;
 USE WAREHOUSE HOL_WH;
 
 
@@ -57,4 +51,6 @@ GRANT IMPORTED PRIVILEGES ON DATABASE FROSTBYTE_WEATHERSOURCE TO ROLE HOL_ROLE;
 
 
 -- Let's look at the data - same 3-part naming convention as any other table
-SELECT * FROM FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.POSTAL_CODES LIMIT 100;
+USE WAREHOUSE HOL_WH;
+USE SCHEMA FROSTBYTE_WEATHERSOURCE.ONPOINT_ID;
+SELECT * FROM POSTAL_CODES LIMIT 10;
