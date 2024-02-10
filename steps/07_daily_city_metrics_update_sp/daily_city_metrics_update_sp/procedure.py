@@ -96,8 +96,8 @@ def main(session: Session) -> str:
     if not table_exists(session, schema='ANALYTICS', name='DAILY_CITY_METRICS'):
         create_daily_city_metrics_table(session)
     
-#    merge_daily_city_metrics(session)
-    session.table('ANALYTICS.DAILY_CITY_METRICS').limit(5).show()
+    merge_daily_city_metrics(session)
+#    session.table('ANALYTICS.DAILY_CITY_METRICS').limit(5).show()
 
     return f"Successfully processed DAILY_CITY_METRICS"
 

@@ -38,7 +38,7 @@ ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL;
 -- Step #2: Execute the tasks
 -- ----------------------------------------------------------------------------
 
-USE SCHEMA HARMONIZED;
+USE SCHEMA ANALYTICS;
 
 EXECUTE TASK ORDERS_UPDATE_TASK;
 
