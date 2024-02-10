@@ -48,8 +48,8 @@ def main(session: Session) -> str:
         create_orders_stream(session)
 
     # Process data incrementally
-    merge_order_updates(session)
-#    session.table('HARMONIZED.ORDERS').limit(5).show()
+#    merge_order_updates(session)
+    session.table('HARMONIZED.ORDERS').limit(5).show()
 
     return f"Successfully processed ORDERS"
 
@@ -57,15 +57,10 @@ def main(session: Session) -> str:
 # For local debugging
 # Be aware you may need to type-convert arguments if you add input parameters
 if __name__ == '__main__':
-    # Add the utils package to our path and import the snowpark_utils function
-    import os, sys
-    current_dir = os.getcwd()
-    parent_parent_dir = os.path.dirname(os.path.dirname(current_dir))
-    sys.path.append(parent_parent_dir)
+    # Create a local Snowpark session
+    session = Session.builder.getOrCreate()
 
-    from utils import snowpark_utils
-    session = snowpark_utils.get_snowpark_session()
-
+    import sys
     if len(sys.argv) > 1:
         print(main(session, *sys.argv[1:]))  # type: ignore
     else:
