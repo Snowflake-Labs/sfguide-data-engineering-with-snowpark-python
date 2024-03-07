@@ -1,7 +1,7 @@
 definition_version: 1
 snowpark:
   project_name: "hol"
-  stage_name: "external.dev_deployment"
+  stage_name: "harmonized.deployment"
   src: "orders_update_sp/"
   procedures:
     - name: "orders_update_sp"

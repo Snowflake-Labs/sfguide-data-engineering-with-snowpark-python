@@ -1,7 +1,7 @@
 definition_version: 1
 snowpark:
   project_name: "hol"
-  stage_name: "external.dev_deployment"
+  stage_name: "analytics.deployment"
   src: "daily_city_metrics_update_sp/"
   procedures:
     - name: "daily_city_metrics_update_sp"
