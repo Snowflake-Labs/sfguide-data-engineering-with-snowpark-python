@@ -45,4 +45,6 @@ for (directory_path, directory_names, file_names) in os.walk(root_directory):
     print(f"Found Snowflake Snowpark project '{project_settings['snowpark']['project_name']}' in folder {base_name}")
     print(f"Calling snowcli to deploy the project")
     os.chdir(f"{directory_path}")
-    os.system(f"snow --config-file {root_directory}/config.toml snowpark deploy --replace")
+    # Make sure all 6 SNOWFLAKE_ environment variables are set
+    # SnowCLI accesses the passowrd directly from the SNOWFLAKE_PASSWORD environmnet variable
+    os.system(f"snow snowpark deploy --replace --temporary-connection --account $SNOWFLAKE_ACCOUNT --user $SNOWFLAKE_USER --role $SNOWFLAKE_ROLE --warehouse $SNOWFLAKE_WAREHOUSE --database $SNOWFLAKE_DATABASE")

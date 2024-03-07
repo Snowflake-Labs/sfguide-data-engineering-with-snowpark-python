@@ -26,7 +26,7 @@ jobs:
       - name: Install Python packages
         run: pip install -r requirements.txt
 
-      - name: Configure snowcli
+      - name: Deploy Snowpark apps
         env:
           SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
@@ -34,15 +34,4 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
-        run: |
-          cd $GITHUB_WORKSPACE
-          echo "[default]" > config.toml
-          echo "account = $SNOWFLAKE_ACCOUNT" >> config.toml
-          echo "user = $SNOWFLAKE_USER" >> config.toml
-          echo "password = $SNOWFLAKE_PASSWORD" >> config.toml
-          echo "role = $SNOWFLAKE_ROLE" >> config.toml
-          echo "warehouse = $SNOWFLAKE_WAREHOUSE" >> config.toml
-          echo "database = $SNOWFLAKE_DATABASE" >> config.toml
-
-      - name: Deploy Snowpark apps
         run: python deploy_snowpark_apps.py $GITHUB_WORKSPACE

@@ -5,6 +5,8 @@ snowpark:
   src: "fahrenheit_to_celsius_udf/"
   functions:
     - name: "fahrenheit_to_celsius_udf"
+      database: "hol_db"
+      schema: "analytics"
       handler: "function.main"
       runtime: "3.10"
       signature:
