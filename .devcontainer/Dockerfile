@@ -7,6 +7,10 @@ WORKDIR /home/vscode
 RUN mkdir .snowflake
 COPY .devcontainer/config.toml .snowflake
 COPY .devcontainer/connections.toml .snowflake
+RUN chown $USER .snowflake/config.toml \
+    && chown $USER .snowflake/connections.toml \
+    && chmod 0600 .snowflake/config.toml \
+    && chmod 0600 .snowflake/connections.toml
 
 # Create the conda environment
 COPY environment.yml .
