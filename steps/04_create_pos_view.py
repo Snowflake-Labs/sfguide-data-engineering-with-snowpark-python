@@ -107,10 +107,7 @@ def test_pos_view(session):
 # For local debugging
 if __name__ == "__main__":
     # Create a local Snowpark session
-    session = Session.builder.getOrCreate()
-
-    create_pos_view(session)
-    create_pos_view_stream(session)
-#    test_pos_view(session)
-
-    session.close()
+    with Session.builder.getOrCreate() as session:
+        create_pos_view(session)
+        create_pos_view_stream(session)
+#        test_pos_view(session)

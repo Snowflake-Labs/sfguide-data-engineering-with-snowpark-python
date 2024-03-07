@@ -67,9 +67,6 @@ def validate_raw_tables(session):
 # For local debugging
 if __name__ == "__main__":
     # Create a local Snowpark session
-    session = Session.builder.getOrCreate()
-
-    load_all_raw_tables(session)
-#    validate_raw_tables(session)
-
-    session.close()
+    with Session.builder.getOrCreate() as session:
+        load_all_raw_tables(session)
+#        validate_raw_tables(session)
