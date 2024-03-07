@@ -1,0 +1,13 @@
+definition_version: 1
+snowpark:
+  project_name: "hol"
+  stage_name: "harmonized.deployment"
+  src: "orders_update_sp/"
+  procedures:
+    - name: "orders_update_sp"
+      database: "hol_db"
+      schema: "harmonized"
+      handler: "procedure.main"
+      runtime: "3.10"
+      signature: ""
+      returns: string

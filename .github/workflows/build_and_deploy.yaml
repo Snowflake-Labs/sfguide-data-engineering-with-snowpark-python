@@ -26,23 +26,12 @@ jobs:
       - name: Install Python packages
         run: pip install -r requirements.txt
 
-      - name: Configure snowcli
-        env:
-          SNOWSQL_ACCOUNT: ${{ secrets.SNOWSQL_ACCOUNT }}
-          SNOWSQL_USER: ${{ secrets.SNOWSQL_USER }}
-          SNOWSQL_PWD: ${{ secrets.SNOWSQL_PWD }}
-          SNOWSQL_ROLE: ${{ secrets.SNOWSQL_ROLE }}
-          SNOWSQL_WAREHOUSE: ${{ secrets.SNOWSQL_WAREHOUSE }}
-          SNOWSQL_DATABASE: ${{ secrets.SNOWSQL_DATABASE }}
-        run: |
-          cd $GITHUB_WORKSPACE
-          echo "[connections.dev]" > config
-          echo "accountname = $SNOWSQL_ACCOUNT" >> config
-          echo "username = $SNOWSQL_USER" >> config
-          echo "password = $SNOWSQL_PWD" >> config
-          echo "rolename = $SNOWSQL_ROLE" >> config
-          echo "warehousename = $SNOWSQL_WAREHOUSE" >> config
-          echo "dbname = $SNOWSQL_DATABASE" >> config
-
       - name: Deploy Snowpark apps
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
         run: python deploy_snowpark_apps.py $GITHUB_WORKSPACE

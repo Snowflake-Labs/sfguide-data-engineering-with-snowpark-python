@@ -106,17 +106,8 @@ def test_pos_view(session):
 
 # For local debugging
 if __name__ == "__main__":
-    # Add the utils package to our path and import the snowpark_utils function
-    import os, sys
-    current_dir = os.getcwd()
-    parent_dir = os.path.dirname(current_dir)
-    sys.path.append(parent_dir)
-
-    from utils import snowpark_utils
-    session = snowpark_utils.get_snowpark_session()
-
-    create_pos_view(session)
-    create_pos_view_stream(session)
-#    test_pos_view(session)
-
-    session.close()
+    # Create a local Snowpark session
+    with Session.builder.getOrCreate() as session:
+        create_pos_view(session)
+        create_pos_view_stream(session)
+#        test_pos_view(session)

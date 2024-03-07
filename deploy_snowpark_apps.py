@@ -1,7 +1,9 @@
-import sys;
-import os;
+import sys
+import os
+import yaml
 
-ignore_folders = ['__pycache__', '.ipynb_checkpoints']
+ignore_folders = ['.git', '__pycache__', '.ipynb_checkpoints']
+snowflake_project_config_filename = 'snowflake.yml'
 
 if len(sys.argv) != 2:
     print("Root directory is required")
@@ -16,27 +18,33 @@ for (directory_path, directory_names, file_names) in os.walk(root_directory):
     base_name = os.path.basename(directory_path)
 
     # Skip any folders we want to ignore
+    # TODO: Update this logic to skip all subfolders of ignored folder
     if base_name in ignore_folders:
 #        print(f"Skipping ignored folder {directory_path}")
         continue
 
-    # An app.toml file in the folder is our indication that this folder contains
-    # a snowcli Snowpark App
-    if not "app.toml" in file_names:
+    # An snowflake.yml file in the folder is our indication that this folder contains
+    # a Snow CLI project
+    if not snowflake_project_config_filename in file_names:
 #        print(f"Skipping non-app folder {directory_path}")
         continue
+    print(f"Found Snowflake project in folder {directory_path}")
 
-    # Next determine what type of app it is
-    app_type = "unknown"
-    if "local_connection.py" in file_names:
-        app_type = "procedure"
-    else:
-        app_type = "function"
+    # Read the project config
+    project_settings = {}
+    with open(f"{directory_path}/{snowflake_project_config_filename}", "r") as yamlfile:
+        project_settings = yaml.load(yamlfile, Loader=yaml.FullLoader)
 
-    # Finally deploy the app with the snowcli tool
-    print(f"Found {app_type} app in folder {directory_path}")
-    print(f"Calling snowcli to deploy the {app_type} app")
+    # Confirm that this is a Snowpark project
+    # TODO: Would be better if the project config file had a project_type key!
+    if 'snowpark' not in project_settings:
+        print(f"Skipping non Snowpark project in folder {base_name}")
+        continue
+
+    # Finally deploy the Snowpark project with the snowcli tool
+    print(f"Found Snowflake Snowpark project '{project_settings['snowpark']['project_name']}' in folder {base_name}")
+    print(f"Calling snowcli to deploy the project")
     os.chdir(f"{directory_path}")
-    # snow login will update the app.toml file with the correct path to the snowsql config file
-    os.system(f"snow login -c {root_directory}/config -C dev")
-    os.system(f"snow {app_type} create")
+    # Make sure all 6 SNOWFLAKE_ environment variables are set
+    # SnowCLI accesses the passowrd directly from the SNOWFLAKE_PASSWORD environmnet variable
+    os.system(f"snow snowpark deploy --replace --temporary-connection --account $SNOWFLAKE_ACCOUNT --user $SNOWFLAKE_USER --role $SNOWFLAKE_ROLE --warehouse $SNOWFLAKE_WAREHOUSE --database $SNOWFLAKE_DATABASE")

@@ -28,7 +28,7 @@ Last Updated: 1/9/2023
 
 -- In the terminal change to the 05_fahrenheit_to_celsius_udf directory and run these commands
 -- pip install -r requirements.txt
--- python app.py 35
+-- python fahrenheit_to_celsius_udf/function.py 35
 
 
 -- ----------------------------------------------------------------------------

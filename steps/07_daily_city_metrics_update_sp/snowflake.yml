@@ -1,0 +1,13 @@
+definition_version: 1
+snowpark:
+  project_name: "hol"
+  stage_name: "analytics.deployment"
+  src: "daily_city_metrics_update_sp/"
+  procedures:
+    - name: "daily_city_metrics_update_sp"
+      database: "hol_db"
+      schema: "analytics"
+      handler: "procedure.main"
+      runtime: "3.10"
+      signature: ""
+      returns: string
