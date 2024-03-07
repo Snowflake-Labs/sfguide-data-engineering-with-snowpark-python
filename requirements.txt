@@ -1,2 +1,2 @@
 snowflake-snowpark-python[pandas]
-snowflake-cli-labs==2.1.0rc1
+snowflake-cli-labs
