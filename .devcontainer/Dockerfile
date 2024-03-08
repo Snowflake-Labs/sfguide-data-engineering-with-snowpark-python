@@ -5,11 +5,9 @@ WORKDIR /home/vscode
 
 # Configure SnowSQL
 RUN mkdir .snowflake
-COPY .devcontainer/config.toml .snowflake
-COPY .devcontainer/connections.toml .snowflake
-RUN chown vscode .snowflake/config.toml \
-    && chown vscode .snowflake/connections.toml \
-    && chmod 0600 .snowflake/config.toml \
+COPY --chown=vscode:vscode .devcontainer/config.toml .snowflake
+COPY --chown=vscode:vscode .devcontainer/connections.toml .snowflake
+RUN chmod 0600 .snowflake/config.toml \
     && chmod 0600 .snowflake/connections.toml
 
 # Create the conda environment
