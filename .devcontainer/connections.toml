@@ -2,9 +2,9 @@
 #export SNOWFLAKE_DEFAULT_CONNECTION_NAME="default"
 
 [default]
-account = "myaccount"
-user = "myuser"
-password = "mypassword"
+account = "SP50877"
+user = "alihaslett"
+password = "WinterFlame484"
 role = "HOL_ROLE"
 warehouse = "HOL_WH"
 database = "HOL_DB"
