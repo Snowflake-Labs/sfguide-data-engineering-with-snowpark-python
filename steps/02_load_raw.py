@@ -1,14 +1,10 @@
-#------------------------------------------------------------------------------
-# Hands-On Lab: Data Engineering with Snowpark
-# Script:       02_load_raw.py
-# Author:       Jeremiah Hansen, Caleb Baechtold
-# Last Updated: 1/9/2023
-#------------------------------------------------------------------------------
-
 import time
+
+import toml
 from snowflake.snowpark import Session
-#import snowflake.snowpark.types as T
-#import snowflake.snowpark.functions as F
+
+config = toml.load("../.devcontainer/connections.toml")
+default_connection = config["default"]
 
 
 POS_TABLES = ['country', 'franchise', 'location', 'menu', 'truck', 'order_header', 'order_detail']
@@ -67,6 +63,6 @@ def validate_raw_tables(session):
 # For local debugging
 if __name__ == "__main__":
     # Create a local Snowpark session
-    with Session.builder.getOrCreate() as session:
+    with Session.builder.configs(default_connection).getOrCreate() as session:
         load_all_raw_tables(session)
 #        validate_raw_tables(session)
