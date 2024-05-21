@@ -14,25 +14,33 @@ TABLE_DICT = {
 }
 
 
-def create_parquet_external_stage(session, external_stage_name,
-                                  file_format_name="parquet_format",
-                                  url_to_stage='s3://sfquickstarts/data-engineering-with-snowpark-python/'):
+def create_parquet_external_stage(
+        session,
+        external_stage_name="FROSTBYTE_RAW_STAGE",
+        schema_of_external_stage="EXTERNAL",
+        file_format_name="PARQUET_FORMAT",
+        url_to_stage='s3://sfquickstarts/data-engineering-with-snowpark-python/'):
     try:
-        # Create a file format
+        session.use_schema(schema_of_external_stage)
+        # Create a file format of the external stage
         create_file_format_sql = f"""
                 CREATE OR REPLACE FILE FORMAT {file_format_name} 
                 TYPE = PARQUET
                 COMPRESSION = 'SNAPPY'
                 """
-        # Execute the statement
         session.sql(create_file_format_sql).collect()
+        while not file_format_exists(session, file_format_name):
+            print(f"Waiting for file format {file_format_name} to be created...")
+            time.sleep(5)
+        print(f"File format {file_format_name} created successfully.")
 
-        # Create a stage
+        # Create an external stage
         create_stage_sql = f"""
                 CREATE OR REPLACE STAGE {external_stage_name}
-                FILE_FORMAT = parquet_format
-                URL = '{url_to_stage}';
+                URL = '{url_to_stage}'
+                FILE_FORMAT = {file_format_name};
                 """
+
         session.sql(create_stage_sql).collect()
 
         while not external_stage_exists(session, external_stage_name):
@@ -55,16 +63,24 @@ def external_stage_exists(session, stage_name):
     return result[0][0] > 0
 
 
-def load_raw_table(session, table_name=None, s3dir=None, year=None, schema=None, stage_name='FROSTBYTE_RAW_STAGE'):
+def file_format_exists(session, file_format_name):
+    sql_query = f"""
+            SELECT COUNT(*)
+            FROM INFORMATION_SCHEMA.FILE_FORMATS
+            WHERE FILE_FORMAT_NAME = '{file_format_name}';
+        """
+    result = session.sql(sql_query).collect()
+
+    return result[0][0] > 0
+
+
+def load_raw_table(session, table_name=None, s3dir=None, year=None, schema=None):
     session.use_schema(schema)
     if year is None:
         location = "@external.frostbyte_raw_stage/{}/{}".format(s3dir, table_name)
     else:
         print('\tLoading year {}'.format(year))
         location = "@external.frostbyte_raw_stage/{}/{}/year={}".format(s3dir, table_name, year)
-    if not external_stage_exists(session, stage_name):
-        print(f"Stage {stage_name} does not exist. Creating.")
-        create_parquet_external_stage(session, stage_name)
     # we can infer schema using the parquet read option
     df = session.read.option("compression", "snappy").parquet(location)
     df.copy_into_table("{}".format(table_name))
@@ -105,7 +121,9 @@ def validate_raw_tables(session):
 
 # For local debugging
 if __name__ == "__main__":
-    # Create a local Snowpark session
     with Session.builder.configs(default_connection).getOrCreate() as session:
+        if not external_stage_exists(session, "FROSTBYTE_RAW_STAGE"):
+            print("External Stage FROSTBYTE_RAW_STAGE does not exist. Creating.")
+            create_parquet_external_stage(session)
         load_all_raw_tables(session)
 #        validate_raw_tables(session)
