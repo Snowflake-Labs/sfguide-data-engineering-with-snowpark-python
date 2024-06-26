@@ -2,9 +2,9 @@
 #export SNOWFLAKE_DEFAULT_CONNECTION_NAME="default"
 
 [default]
-account = "myaccount"
-user = "myuser"
-password = "mypassword"
+account = "analytics.central-us.azure"
+user = "SVC_LAB_USER"
+password = "Learn!Snowflake!Quicklabs2024!"
 role = "HOL_ROLE"
 warehouse = "HOL_WH"
 database = "HOL_DB"
