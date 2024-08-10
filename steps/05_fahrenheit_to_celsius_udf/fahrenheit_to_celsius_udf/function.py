@@ -12,10 +12,8 @@
 import sys
 from scipy.constants import convert_temperature
 
-def main(temp_fahrenheit: float) -> float:
-    # return convert_temperature(float(temp_fahrenheit), 'F', 'C')
-    return 5 * (temp_fahrenheit - 32.0) / 9.0
-
+def main(temp_f: float) -> float:
+    return convert_temperature(float(temp_f), 'F', 'C')
 
 # For local debugging
 # Be aware you may need to type-convert arguments if you add input parameters
